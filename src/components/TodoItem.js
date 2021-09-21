@@ -43,27 +43,31 @@ class EditingItem extends React.Component {
     const { id, title, handleUpdate, handleDelete } = this.props;
     const { inputValue } = this.state;
     return (
-      //Replace div with form?
-      <div className="border text-center p-3">
+      <form
+        className="border text-center p-3"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleUpdate(id, inputValue);
+        }}
+      >
         <input
           className="form-control text-center my-3"
           type="text"
           defaultValue={title}
           onChange={this.handleChange}
         />
-        <button
+        <input
           className="btn btn-success mx-1"
-          onClick={() => handleUpdate(id, inputValue)}
-        >
-          Confirm Edit
-        </button>
+          type="submit"
+          value="Confirm Edit"
+        />
         <button
           className="btn btn-danger mx-1"
           onClick={() => handleDelete(id)}
         >
           Delete
         </button>
-      </div>
+      </form>
     );
   }
 }
