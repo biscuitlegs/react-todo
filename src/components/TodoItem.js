@@ -6,11 +6,12 @@ class TodoItem extends React.Component {
   }
 
   render() {
+    const { id, title, handleDelete } = this.props;
     return (
       <div>
-        <h3>{this.props.title}</h3>
+        <h3>{title}</h3>
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => handleDelete(id)}>Delete</button>
       </div>
     );
   }

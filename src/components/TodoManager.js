@@ -8,6 +8,7 @@ class TodoManager extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       todoItems: [
         {
@@ -35,11 +36,22 @@ class TodoManager extends React.Component {
     });
   }
 
+  handleDelete(id) {
+    const { todoItems } = this.state;
+    const newTodoItems = todoItems.filter((item) => item.id !== id);
+    this.setState({
+      todoItems: newTodoItems,
+    });
+  }
+
   render() {
     return (
       <div>
         <TodoInput onChange={this.handleChange} onSubmit={this.onSubmit} />
-        <TodoList todoItems={this.state.todoItems} />
+        <TodoList
+          todoItems={this.state.todoItems}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
   }
