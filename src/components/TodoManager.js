@@ -9,13 +9,16 @@ class TodoManager extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.state = {
       todoItems: [
         {
           id: uniqid(),
           title: "Walk dog",
+          editing: false,
         },
-        { id: uniqid(), title: "Mow lawn" },
+        { id: uniqid(), title: "Mow lawn", editing: false },
       ],
       newTodoItem: { id: uniqid(), title: "" },
     };
@@ -34,6 +37,7 @@ class TodoManager extends React.Component {
       todoItems: [...todoItems, newTodoItem],
       newTodoItem: { id: uniqid(), title: "" },
     });
+    e.target.reset();
   }
 
   handleDelete(id) {
@@ -44,13 +48,36 @@ class TodoManager extends React.Component {
     });
   }
 
+  handleEdit(id) {
+    const { todoItems } = this.state;
+    const editingItem = { ...todoItems.find((item) => item.id === id) };
+    const newTodoItems = todoItems.filter((item) => item.id !== id);
+    editingItem.editing = !editingItem.editing;
+    this.setState({
+      todoItems: [...newTodoItems, editingItem],
+    });
+  }
+
+  handleUpdate(id, newTitle) {
+    const { todoItems } = this.state;
+    const updatingItem = { ...todoItems.find((item) => item.id === id) };
+    const newTodoItems = todoItems.filter((item) => item.id !== id);
+    updatingItem.editing = !updatingItem.editing;
+    updatingItem.title = newTitle;
+    this.setState({
+      todoItems: [...newTodoItems, updatingItem],
+    });
+  }
+
   render() {
     return (
       <div>
-        <TodoInput onChange={this.handleChange} onSubmit={this.onSubmit} />
+        <TodoInput handleChange={this.handleChange} onSubmit={this.onSubmit} />
         <TodoList
           todoItems={this.state.todoItems}
           handleDelete={this.handleDelete}
+          handleEdit={this.handleEdit}
+          handleUpdate={this.handleUpdate}
         />
       </div>
     );

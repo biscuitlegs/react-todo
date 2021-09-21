@@ -8,7 +8,7 @@ class TodoInput extends React.Component {
   render() {
     return (
       <form onSubmit={this.props.onSubmit}>
-        <input type="text" onChange={this.props.onChange} />
+        <input type="text" onChange={this.props.handleChange} />
         <input type="submit" value="Add Item" />
       </form>
     );
