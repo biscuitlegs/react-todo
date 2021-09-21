@@ -8,7 +8,7 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul className="p-0">
         {this.props.todoItems.map(({ id, title, editing }) => {
           return (
             <TodoItem

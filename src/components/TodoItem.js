@@ -8,10 +8,17 @@ class DisplayingItem extends React.Component {
   render() {
     const { id, title, handleEdit, handleDelete } = this.props;
     return (
-      <div>
+      <div className="border text-center p-4">
         <h3>{title}</h3>
-        <button onClick={() => handleEdit(id)}>Edit</button>
-        <button onClick={() => handleDelete(id)}>Delete</button>
+        <button className="btn btn-primary mx-1" onClick={() => handleEdit(id)}>
+          Edit
+        </button>
+        <button
+          className="btn btn-danger mx-1"
+          onClick={() => handleDelete(id)}
+        >
+          Delete
+        </button>
       </div>
     );
   }
@@ -36,12 +43,26 @@ class EditingItem extends React.Component {
     const { id, title, handleUpdate, handleDelete } = this.props;
     const { inputValue } = this.state;
     return (
-      <div>
-        <input type="text" defaultValue={title} onChange={this.handleChange} />
-        <button onClick={() => handleUpdate(id, inputValue)}>
+      //Replace div with form?
+      <div className="border text-center p-3">
+        <input
+          className="form-control text-center my-3"
+          type="text"
+          defaultValue={title}
+          onChange={this.handleChange}
+        />
+        <button
+          className="btn btn-success mx-1"
+          onClick={() => handleUpdate(id, inputValue)}
+        >
           Confirm Edit
         </button>
-        <button onClick={() => handleDelete(id)}>Delete</button>
+        <button
+          className="btn btn-danger mx-1"
+          onClick={() => handleDelete(id)}
+        >
+          Delete
+        </button>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from "react";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 import uniqid from "uniqid";
+import Bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 
 class TodoManager extends React.Component {
   constructor(props) {
@@ -71,14 +72,20 @@ class TodoManager extends React.Component {
 
   render() {
     return (
-      <div>
-        <TodoInput handleChange={this.handleChange} onSubmit={this.onSubmit} />
-        <TodoList
-          todoItems={this.state.todoItems}
-          handleDelete={this.handleDelete}
-          handleEdit={this.handleEdit}
-          handleUpdate={this.handleUpdate}
-        />
+      <div className="row justify-content-center">
+        <div className="col-lg-10">
+          <h1 className="text-center my-3">Todo List</h1>
+          <TodoInput
+            handleChange={this.handleChange}
+            onSubmit={this.onSubmit}
+          />
+          <TodoList
+            todoItems={this.state.todoItems}
+            handleDelete={this.handleDelete}
+            handleEdit={this.handleEdit}
+            handleUpdate={this.handleUpdate}
+          />
+        </div>
       </div>
     );
   }
