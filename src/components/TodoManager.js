@@ -12,6 +12,7 @@ class TodoManager extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.sortById = this.sortById.bind(this);
     this.state = {
       todoItems: [
         {
@@ -23,6 +24,10 @@ class TodoManager extends React.Component {
       ],
       newTodoItem: { id: uniqid(), title: "" },
     };
+  }
+
+  sortById(todoItems) {
+    return todoItems.sort((a, b) => (a.id > b.id ? 1 : -1));
   }
 
   handleChange(e) {
@@ -45,7 +50,7 @@ class TodoManager extends React.Component {
     const { todoItems } = this.state;
     const newTodoItems = todoItems.filter((item) => item.id !== id);
     this.setState({
-      todoItems: newTodoItems,
+      todoItems: this.sortById(newTodoItems),
     });
   }
 
@@ -55,7 +60,7 @@ class TodoManager extends React.Component {
     const newTodoItems = todoItems.filter((item) => item.id !== id);
     editingItem.editing = !editingItem.editing;
     this.setState({
-      todoItems: [...newTodoItems, editingItem],
+      todoItems: this.sortById([...newTodoItems, editingItem]),
     });
   }
 
@@ -66,7 +71,7 @@ class TodoManager extends React.Component {
     updatingItem.editing = !updatingItem.editing;
     updatingItem.title = newTitle;
     this.setState({
-      todoItems: [...newTodoItems, updatingItem],
+      todoItems: this.sortById([...newTodoItems, updatingItem]),
     });
   }
 
